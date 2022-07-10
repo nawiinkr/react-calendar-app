@@ -1,37 +1,20 @@
 import TaskList from "./TaskList";
-function Block({ day, index, selectedIndex, setSelectedIndex }) {
+function Block({ day, index, selectedIndex, setSelectedIndex, setDay }) {
   const blockStyle = `${day.date ? "block" : ""}`;
   const selectedBlockStyle = index === selectedIndex ? "selected-block" : "";
   const maxTasksToShow = 2;
-  const tasks = [
-    {
-      text: "Task 1",
-    },
-    {
-      text: "Task 1",
-    },
-    {
-      text: "Task 1",
-    },
-    {
-      text: "Task 1",
-    },
-    {
-      text: "Task 1",
-    },
-    {
-      text: "Task 1",
-    },
-  ];
-  if (tasks.length > maxTasksToShow) {
-    const diff = tasks.length - maxTasksToShow;
-    tasks.splice(maxTasksToShow);
-    tasks.push({
+  //const tasks = day.tasks;
+  const uiTasks = Array.from(day.tasks);
+  if (uiTasks.length > maxTasksToShow) {
+    const diff = uiTasks.length - maxTasksToShow;
+    uiTasks.splice(maxTasksToShow);
+    uiTasks.push({
       text: `+${diff}`,
     });
   }
   const onBlockPress = () => {
     setSelectedIndex(index);
+    setDay(day);
   };
   return (
     <div
@@ -39,7 +22,7 @@ function Block({ day, index, selectedIndex, setSelectedIndex }) {
       onClick={onBlockPress}
     >
       <h4 className={`${index % 7 === 0 ? "day-sunday" : ""}`}>{day.date}</h4>
-      {day.date && <TaskList tasks={tasks}></TaskList>}
+      {day.date && <TaskList tasks={uiTasks}></TaskList>}
     </div>
   );
 }

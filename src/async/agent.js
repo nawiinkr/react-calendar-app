@@ -8,11 +8,16 @@ export const getDaysData = async (calendarId, month, year) => {
         date: index + 1,
         month: month,
         year: year,
+        tasks: [],
       };
     });
     for (let i = 1; i <= getFillingDiff(year, month); i++) {
       data.unshift({
+        id: "",
         date: "",
+        month: "",
+        year: "",
+        tasks: [],
       });
     }
     resolve(data);

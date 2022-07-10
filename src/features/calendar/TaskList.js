@@ -1,9 +1,7 @@
 const TaskList = ({ tasks }) => {
   return (
     <div className="task-list">
-      {tasks.map((task) => (
-        <span>{task.text}</span>
-      ))}
+      {tasks && tasks.map((task) => <span key={task.id}>{task.text}</span>)}
     </div>
   );
 };

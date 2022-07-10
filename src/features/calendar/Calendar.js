@@ -4,6 +4,7 @@ import { getDaysData } from "../../async/agent";
 import leftArrow from "../../images/leftArrow.svg";
 import rightArrow from "../../images/rightArrow.svg";
 import { MONTHS } from "./Constants";
+import Dialog from "./Dialog";
 function Calendar({ calendarId }) {
   if (!calendarId) {
     throw new Error("Calendar Id provided is not supported");
@@ -11,7 +12,8 @@ function Calendar({ calendarId }) {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [days, setDays] = useState([]);
-
+  const [day, setDay] = useState({});
+  const [dialogOpen, setDialogOpen] = useState(false);
   useEffect(() => {
     if (currentMonth === -1) {
       setCurrentMonth(11);
@@ -26,6 +28,10 @@ function Calendar({ calendarId }) {
     };
     fetchData();
   }, [currentMonth, currentYear, calendarId]);
+
+  useEffect(() => {
+    setDialogOpen(day.date);
+  }, [day]);
 
   return (
     <div className="calendar-root">
@@ -92,7 +98,13 @@ function Calendar({ calendarId }) {
           }}
         ></input>
       </div>
-      <InnerCalendar days={days}></InnerCalendar>
+      <InnerCalendar days={days} setDay={setDay}></InnerCalendar>
+      <Dialog
+        setDialogOpen={setDialogOpen}
+        day={day}
+        open={dialogOpen}
+        setDay={setDay}
+      ></Dialog>
     </div>
   );
 }

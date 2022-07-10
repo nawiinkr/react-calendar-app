@@ -2,8 +2,8 @@ import { useState } from "react";
 import Block from "./Block";
 import "./Calendar.css";
 import { weekDays } from "./Constants";
-function InnerCalendar(props) {
-  const days = props.days;
+function InnerCalendar({ days, setDay }) {
+  //const days = days;
   const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <div className="inner-calendar">
@@ -24,6 +24,7 @@ function InnerCalendar(props) {
             selectedIndex={selectedIndex}
             key={`weekday-date-${index}`}
             setSelectedIndex={setSelectedIndex}
+            setDay={setDay}
           ></Block>
         );
       })}
