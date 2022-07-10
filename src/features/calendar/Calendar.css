@@ -1,0 +1,61 @@
+.calendar-root {
+  text-align: center;
+}
+
+.inner-calendar {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+}
+
+.error-border {
+  border: solid red;
+}
+
+.block {
+  cursor: pointer;
+  max-height: 100px;
+  min-width: 60px;
+  margin-left: 1rem;
+  height: 10vh;
+  border: 1px solid transparent;
+}
+
+.selected-block {
+  border-color: lightgreen;
+  border-width: 3px;
+}
+
+.block:hover {
+  border-color: lightgray;
+}
+
+.block > h4 {
+  margin: 0;
+}
+
+.week-day-labels {
+  border-bottom: 1px solid lightgray;
+  margin-left: 1rem;
+}
+
+.day-sunday {
+  color: red;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-list span {
+  font-size: x-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  text-align: left;
+  white-space: nowrap;
+  font-family: cursive;
+  background-color: lightgray;
+  border-radius: 1px;
+  margin: 1px;
+}
