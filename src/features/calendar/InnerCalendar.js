@@ -2,9 +2,9 @@ import { useState } from "react";
 import Block from "./Block";
 import "./Calendar.css";
 import { weekDays } from "./Constants";
-function InnerCalendar({ days, setDay }) {
+function InnerCalendar({ days, setDay, setSelectedIndex, selectedIndex }) {
   //const days = days;
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+
   return (
     <div className="inner-calendar">
       {weekDays.map((weekDay, index) => {

@@ -14,6 +14,7 @@ function Calendar({ calendarId }) {
   const [days, setDays] = useState([]);
   const [day, setDay] = useState({});
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   useEffect(() => {
     if (currentMonth === -1) {
       setCurrentMonth(11);
@@ -30,7 +31,14 @@ function Calendar({ calendarId }) {
   }, [currentMonth, currentYear, calendarId]);
 
   useEffect(() => {
+    if (!day.date) {
+      return;
+    }
     setDialogOpen(day.date);
+    const index = days.findIndex((d) => d.id === day.id);
+    if (index > -1) {
+      setDays([...days.slice(0, index), day, ...days.slice(index + 1)]);
+    }
   }, [day]);
 
   return (
@@ -42,6 +50,7 @@ function Calendar({ calendarId }) {
           alt="left navigation"
           onClick={() => {
             setCurrentMonth(currentMonth - 1);
+            setSelectedIndex(-1);
           }}
         />
         <h2
@@ -59,6 +68,7 @@ function Calendar({ calendarId }) {
           alt="right navigation"
           onClick={() => {
             setCurrentMonth(currentMonth + 1);
+            setSelectedIndex(-1);
           }}
         />
       </span>
@@ -68,6 +78,7 @@ function Calendar({ calendarId }) {
             value={currentMonth}
             onChange={(event) => {
               setCurrentMonth(event.currentTarget.selectedIndex);
+              setSelectedIndex(-1);
             }}
           >
             {MONTHS.map((month, index) => {
@@ -95,10 +106,16 @@ function Calendar({ calendarId }) {
               //event.target.classList.remove("error-border");
             }
             setCurrentYear(event.currentTarget.value);
+            setSelectedIndex(-1);
           }}
         ></input>
       </div>
-      <InnerCalendar days={days} setDay={setDay}></InnerCalendar>
+      <InnerCalendar
+        setSelectedIndex={setSelectedIndex}
+        selectedIndex={selectedIndex}
+        days={days}
+        setDay={setDay}
+      ></InnerCalendar>
       <Dialog
         setDialogOpen={setDialogOpen}
         day={day}

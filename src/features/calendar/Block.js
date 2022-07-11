@@ -1,4 +1,5 @@
 import TaskList from "./TaskList";
+import { uuidv4 } from "../../async/agent";
 function Block({ day, index, selectedIndex, setSelectedIndex, setDay }) {
   const blockStyle = `${day.date ? "block" : ""}`;
   const selectedBlockStyle = index === selectedIndex ? "selected-block" : "";
@@ -10,6 +11,7 @@ function Block({ day, index, selectedIndex, setSelectedIndex, setDay }) {
     uiTasks.splice(maxTasksToShow);
     uiTasks.push({
       text: `+${diff}`,
+      taskId: `${uuidv4()}`,
     });
   }
   const onBlockPress = () => {
