@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import InnerCalendar from "./InnerCalendar";
 import { getDaysData } from "../../async/agent";
-import leftArrow from "../../images/leftArrow.svg";
-import rightArrow from "../../images/rightArrow.svg";
 import { MONTHS } from "./Constants";
 import Dialog from "./Dialog";
 function Calendar({ calendarId }) {
@@ -46,7 +44,7 @@ function Calendar({ calendarId }) {
       <span>
         <img
           style={{ width: "16px", height: "16px", cursor: "pointer" }}
-          src={leftArrow}
+          src="https://img.icons8.com/cotton/344/circled-chevron-left--v1.png"
           alt="left navigation"
           onClick={() => {
             setCurrentMonth(currentMonth - 1);
@@ -64,7 +62,7 @@ function Calendar({ calendarId }) {
         </h2>
         <img
           style={{ width: "16px", height: "16px", cursor: "pointer" }}
-          src={rightArrow}
+          src="https://img.icons8.com/cotton/344/circled-chevron-right--v1.png"
           alt="right navigation"
           onClick={() => {
             setCurrentMonth(currentMonth + 1);
